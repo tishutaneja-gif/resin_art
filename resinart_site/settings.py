@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+import os
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get("postgresql://resin_user:BrG9twv7A6B9QFLhC8RgMa2OYyTNanJf@dpg-d6la6kvtskes73ekq020-a/resin_art")
+    )
+}
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
@@ -76,12 +83,6 @@ WSGI_APPLICATION = 'resinart_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -119,5 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 
