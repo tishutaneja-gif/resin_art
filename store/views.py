@@ -7,6 +7,7 @@ import uuid
 from django.conf import settings
 from django.http import HttpResponse
 from .db import get_connection
+from django.db import connection
 
 def setup_database(request):
 
@@ -57,21 +58,15 @@ def logout_view(request):
     logout(request)
     return redirect('admin_login')
 
+
+
 def dbconnections():
     """
-    Establish a direct MySQL database connection.
-    Returns both the connection and a cursor object.
+    Use Django's configured database connection (PostgreSQL on Render).
+    Returns the connection and cursor.
     """
-    db = pymysql.connect(
-        host="dpg-d6la6kvtskes73ekq020-a",       # your database host
-        user="resin_user",            # your database username
-        password="BrG9twv7A6B9QFLhC8RgMa2OYyTNanJf",  # your database password
-        database="resin_art", # your database name
-        port=5432,              # default MySQL port
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor
-    )
-    cur = db.cursor()
+    cur = connection.cursor()
+    db = connection
     return db, cur
 
 
@@ -201,4 +196,5 @@ def products_by_category(request, cat):
 
 
     return render(request, "products.html", {"products": products})    
+
 
