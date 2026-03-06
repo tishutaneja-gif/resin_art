@@ -5,7 +5,54 @@ from django.shortcuts import redirect
 import os
 import uuid
 from django.conf import settings
+from django.http import HttpResponse
+from .db import get_connection
 
+def setup_database(request):
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # CREATE ADMINS TABLE
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS admins (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50),
+        password VARCHAR(100)
+    )
+    """)
+
+    # INSERT ADMIN VALUE
+    cursor.execute("""
+    INSERT INTO admins (id, username, password)
+    VALUES (1, 'Tishu01', 'Resinart@123')
+    """)
+
+    # CREATE PRODUCTS TABLE
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS products (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(200),
+        description TEXT,
+        price FLOAT,
+        image_url VARCHAR(255),
+        category VARCHAR(100)
+    )
+    """)
+
+    # INSERT PRODUCTS
+    cursor.execute("""
+    INSERT INTO products (id, title, description, price, image_url, category)
+    VALUES
+    (1,'nature..','waterfall..',3800,'products/ec41e7e24c4b481b99126fd5d6fe7e36.jpg','painting'),
+    (2,'painting..','it is about wildlife..',5600,'products/a110871205d349d19257b3c54fc682e0.jpg','painting')
+    """)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return HttpResponse("Database tables created and values inserted successfully")
 def logout_view(request):
     logout(request)
     return redirect('admin_login')
@@ -151,5 +198,6 @@ def products_by_category(request, cat):
 
     finally:
         db.close()
+
 
     return render(request, "products.html", {"products": products})    
