@@ -17,7 +17,8 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get("postgresql://resin_user:BrG9twv7A6B9QFLhC8RgMa2OYyTNanJf@dpg-d6la6kvtskes73ekq020-a/resin_art")
+        default='postgresql://resin_user:BrG9twv7A6B9QFLhC8RgMa2OYyTNanJf@dpg-d6la6kvtskes73ekq020-a/resin_art',
+        conn_max_age=600
     )
 }
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -120,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 
 
