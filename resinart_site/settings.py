@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-j^(0%u3a43+%m-b=8bo^9*nb4uqwm1581^z6co&@$hp7m&-85b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["resin-art.onrender.com"]
+ALLOWED_HOSTS = ["resin-art.onrender.com","localhost",
+    "127.0.0.1"]
 
 
 # Application definition
@@ -118,4 +119,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
