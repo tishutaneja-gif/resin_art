@@ -63,11 +63,11 @@ def dbconnections():
     Returns both the connection and a cursor object.
     """
     db = pymysql.connect(
-        host="localhost",       # your database host
-        user="root",            # your database username
-        password="Tishu@4789",  # your database password
-        database="resin_store", # your database name
-        port=3306,              # default MySQL port
+        host="dpg-d6la6kvtskes73ekq020-a",       # your database host
+        user="resin_user",            # your database username
+        password="BrG9twv7A6B9QFLhC8RgMa2OYyTNanJf",  # your database password
+        database="resin_art", # your database name
+        port=5432,              # default MySQL port
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor
     )
@@ -201,3 +201,4 @@ def products_by_category(request, cat):
 
 
     return render(request, "products.html", {"products": products})    
+
