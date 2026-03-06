@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resin Art Catalog</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<style>
+
+body {
+    background: linear-gradient(120deg, #8e2de2, #4a00e0);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#111;
+}
+
+.navbar-brand{
+    font-weight:700;
+    font-size:22px;
+}
+
+.dropdown-menu{
+    border-radius:10px;
+}
+
+/* PAGE TITLE */
+
+h2 {
+    text-align: center;
+    margin-top:40px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* DESCRIPTION BOX */
+
+.description-box{
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    font-size: 16px;
+    color: #f3e9ff;
+}
+
+/* PRODUCT CARDS */
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255,255,255,0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-body h5 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.card-body p {
+    color: #ffebf8;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+<div class="container">
+
+<a class="navbar-brand" href="/">ResinArt</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/">Home</a>
+</li>
+
+<li class="nav-item dropdown">
+
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+Collections
+</a>
+
+<ul class="dropdown-menu">
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'painting' %}">Paintings</a></li>
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'Engagement Plaques' %}">Engagement Plaques</a></li>
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'Religious Items' %}">Religious Items</a></li>
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'Clocks' %}">Clocks</a></li>
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'Tea Coasters' %}">Tea Coasters</a></li>
+
+<li><a class="dropdown-item" href="{% url 'products_by_category' 'Jewellery' %}">Jewellery</a></li>
+
+</ul>
+
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/products/">Catalog</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/about/">About</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</nav>
+
+
+
+<h2>🖼️ Our Resin Art Collection</h2>
+
+<div class="description-box">
+
+<p>
+<strong>Resin Art</strong> is a modern and beautiful form of artwork created using epoxy resin,
+a clear liquid that hardens into a glossy glass-like finish. Artists mix resin with pigments,
+colors, glitter, stones, dried flowers, and decorative elements to create stunning designs.
+</p>
+
+<p>
+Each resin art piece is unique because the flowing nature of resin creates natural patterns
+that cannot be exactly replicated. This makes every artwork one-of-a-kind.
+</p>
+
+<p>
+In our collection, every piece is handcrafted with creativity and care to bring elegance,
+color, and artistic beauty into your living spaces. ✨
+</p>
+
+</div>
+
+
+
+<div class="container">
+
+<div class="row">
+
+{% for p in products %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card">
+
+<img src="/media/{{ p.image_url }}"
+class="card-img-top"
+style="height:250px;object-fit:cover;">
+
+<div class="card-body">
+
+<h5>{{ p.title }}</h5>
+
+<p>₹ {{ p.price }}</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12 text-center">
+
+<p>No products uploaded yet 🌸</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
