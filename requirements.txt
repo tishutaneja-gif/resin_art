@@ -1,6 +1,7 @@
-asgiref==3.11.1
 Django==6.0.2
-pip==25.3
+gunicorn==23.0.0
+whitenoise==6.6.0
 PyMySQL==1.1.2
+asgiref==3.11.1
 sqlparse==0.5.5
 tzdata==2025.3
